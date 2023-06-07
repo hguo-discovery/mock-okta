@@ -26,10 +26,12 @@ To make such a minimalist approach work, it requires some changes to the SPA cod
 7. Start SPA and this mock server (`yarn start`).
 8. Visit SPA and observe OKTA step is skipped.
 
-Alternatively, run `yarn start access-spa-via-proxy` to run the SPA on the same port (http://localhost:3333) of mock routes.
+Alternatively, run `yarn start set-okta-token` to run the SPA on the same port (http://localhost:3333) of mock routes.
 
 For example, your SPA could be running at `http://localhost:4200`, and you can configure the OKTA mock to be running at `http://localhost:3333`.
 Once configured all these in `.env`, you'll be visiting `http://localhost:3333` to access the SPA and the mock server will skip all the OKTA steps for you and take you to SPA's home page.   
+
+Once token is set from mock server side, the part to do that in SPA can be eliminated.
 
 ### TODO
 
