@@ -1,0 +1,11 @@
+<html>
+<head>
+    <script>
+        const params = (new URL(document.location)).searchParams;
+        const token = params.get("token");
+        localStorage.setItem('okta-token-storage', token);
+        window.location.href = params.get("redirectTo");
+    </script>
+</head>
+<body>Set okta token in local storage ...</body>
+</html>

@@ -1,10 +1,18 @@
+import path from 'path';
 import mockData from './mock-data';
 import { spaRedirectUrl } from './utilities';
 
 const mockRoutes = (app) => {
-    // mock routes related to OKTA OIDC/SPA flow
+    app.get('/set-okta-token-then-redirect', (req, res) => {
+        res.sendFile(path.join(__dirname, `/set-okta-token-then-redirect.html`));
+    });
+
+    // mock routes used in OKTA OIDC/SPA flow
     app.get('/login/step-up/redirect', (req, res) => {
-        res.redirect(`${spaRedirectUrl}/auth-callback?code=${mockData.okta.authCode}&state=${mockData.okta.authState}`);
+        const redirectTo = `${spaRedirectUrl}/auth-callback?code=${mockData.okta.authCode}&state=${mockData.okta.authState}`;
+        process.argv.slice(2).indexOf('set-okta-token') >= 0
+            ? res.redirect(`/set-okta-token-then-redirect?redirectTo=${redirectTo}&token=${JSON.stringify(mockData.okta.token())}`)
+            : redirectTo
     });
 
     app.get('/oauth2/default/v1/authorize', (req, res) => {

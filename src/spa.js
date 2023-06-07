@@ -16,10 +16,8 @@ if (mockBasePath && mockBasePath !== '/') {
     });
 }
 
-// Only do proxy if run command "npm start" is appended with "access-spa-via-proxy"
-if (process.argv.slice(2).indexOf('access-spa-via-proxy') >= 0) {
-    proxySpa(app);
-}
+// Always make proxy available
+proxySpa(app);
 
 mockRoutes(app, mockFullBaseUrl);
 
